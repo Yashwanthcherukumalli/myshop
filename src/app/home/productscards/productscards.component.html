@@ -1,0 +1,13 @@
+<!-- src/app/home/productscards/productscards.component.html -->
+<div class="card-container">
+  <div class="card" *ngFor="let product of filteredProducts">
+    <img [src]="product.image" alt="{{ product.title }}" (error)="onImageError($event)">
+    
+    <div class="card-details">
+      <h3>{{ product.title }}</h3>
+      <p><strong>Category:</strong> {{ product.category }}</p>
+      <p><strong>Price:</strong> {{ product.price | currency }}</p>
+    </div>
+    <button (click)="productdetails(product.id)">View More Details</button>
+  </div>
+</div>

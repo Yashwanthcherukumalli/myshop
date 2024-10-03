@@ -1,0 +1,16 @@
+<div *ngIf="productDetails">
+    <!-- Using the custom 'capitalize' pipe -->
+     <h2>{{ productDetails.title }}</h2>
+
+    
+    <img [src]="productDetails.image" alt="{{ productDetails.title }}">
+    
+    <p><strong>Category:</strong> {{ productDetails.category }}</p>
+    
+    <p><strong>Price:</strong> {{ productDetails.price | currency:'USD' }}</p>
+    
+    <p><strong>Available since:</strong> {{ productDetails.creationDate | date: 'longDate' }}</p>
+    
+    <p><strong>Description:</strong> {{ productDetails.description }}</p>
+</div>
+  

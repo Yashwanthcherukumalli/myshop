@@ -1,0 +1,20 @@
+<!-- src/app/components/navbar/navbar.component.html -->
+<div class="container">
+    <div class="logo">
+        <h1>My Shopping App</h1>
+    </div>
+    <nav class="navbar">
+        <div class="left">
+            <a routerLink="/home">Home</a>
+            <a routerLink="/about">About</a>
+            <a routerLink="/categories">Categories</a>
+        </div>
+        <div class="right">
+            <i class="bi bi-search"></i>
+            <!-- src/app/dashboard/header/header.component.html -->
+<input type="text" placeholder="Search..." (input)="onSearchChange($event)">
+<button>Search</button>
+        </div>
+    </nav>
+</div>
+header
