@@ -1,16 +1,27 @@
-<div *ngIf="productDetails">
-    <!-- Using the custom 'capitalize' pipe -->
-     <h2>{{ productDetails.title }}</h2>
-
-    
-    <img [src]="productDetails.image" alt="{{ productDetails.title }}">
-    
-    <p><strong>Category:</strong> {{ productDetails.category }}</p>
-    
-    <p><strong>Price:</strong> {{ productDetails.price | currency:'USD' }}</p>
-    
-    <p><strong>Available since:</strong> {{ productDetails.creationDate | date: 'longDate' }}</p>
-    
-    <p><strong>Description:</strong> {{ productDetails.description }}</p>
-</div>
+<div class="card" *ngIf="productDetails">
+    <div class="card-img">
+      <img [src]="productDetails.image" alt="{{ productDetails.title }}">
+    </div>
+    <div class="card-details">
+      <p><strong>Price:</strong> {{ productDetails.price | currency:'USD' }}</p>
+      <h4>{{ productDetails.title }}</h4>
+      <p>{{productDetails.category}}</p>
+      <p><strong>Description:</strong> {{ productDetails.description }}</p>
+    </div>
+  </div>
+  
+  <h3>Related Products</h3>
+  <div class="recommended">
+    <div class="loop" *ngIf="productsBySameCategory.length > 0">
+      <div class="card" *ngFor="let product of productsBySameCategory">
+        <div class="card-img">
+          <img [src]="product.image" alt="{{ product.title }}">
+        </div>
+        <div class="card-details">
+          <p><strong>Price:</strong> {{ product.price | currency:'USD' }}</p>
+          <h4>{{ product.title }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
   

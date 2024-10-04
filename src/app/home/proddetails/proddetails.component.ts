@@ -10,12 +10,13 @@ import { ProdectsapiService } from '../../prodectsapi.service';
 export class ProddetailsComponent implements OnInit {
   productId: number | undefined;
   productDetails: any;
+  productsBySameCategory: any[] = [];
 
   constructor(private route: ActivatedRoute, private productsService: ProdectsapiService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.productId = +params.get('id')!; // Ensure productId is being retrieved correctly
+      this.productId = +params.get('id')!;
       this.loadProductDetails();
     });
   }
@@ -23,14 +24,25 @@ export class ProddetailsComponent implements OnInit {
   loadProductDetails(): void {
     if (this.productId) {
       this.productsService.getProductById(this.productId).subscribe(
-        (res) => {
-          this.productDetails = res; // Handle the response here
-          console.log(this.productDetails); // Check if product details are retrieved correctly
+        (res: any) => {
+          this.productDetails = res;
+          this.loadProductsByCategory(this.productDetails.category); // Load similar products based on category
         },
         (error) => {
           console.error('Error fetching product details', error);
         }
       );
     }
+  }
+
+  loadProductsByCategory(category: string): void {
+    this.productsService.getproducts().subscribe(
+      (products: any) => {
+        this.productsBySameCategory = products.filter((product: any) => product.category === category && product.id !== this.productId);
+      },
+      (error) => {
+        console.error('Error fetching products by category', error);
+      }
+    );
   }
 }
